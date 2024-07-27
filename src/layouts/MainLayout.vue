@@ -4,7 +4,7 @@
       <q-toolbar>
         <q-btn flat dense round @click="drawer = !drawer" icon="menu" aria-label="Menu" />
         <q-toolbar-title>
-          Quasar App
+          RhinoBill App
         </q-toolbar-title>
       </q-toolbar>
     </q-header>

@@ -50,7 +50,7 @@
         try {
           const payload = {
             course: {
-              id: Math.floor(Math.random() * (9999 - 1000 + 1)) + 1000,
+              id: this.course.id,
               code: this.course.code,
               title: this.course.title,
               credits: this.course.credits
