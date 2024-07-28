@@ -10,6 +10,7 @@
         emit-value
         map-options
         :readonly="isViewMode"
+        :rules="[val => !!val || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val) || 'Required field']"
       />
       <q-select
         v-model="application.courseId"
@@ -20,12 +21,14 @@
         emit-value
         map-options
         :readonly="isViewMode"
+        :rules="[val => !!val || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val) || 'Required field']"
       />
       <q-input
         v-model="formattedApplicationDate"
         type="date"
         label="Application Date"
         :readonly="isViewMode"
+        :rules="[val => !!val || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val) || 'Required field']"
       />
       <q-btn @click="back" color="primary" label="Back" />
       <q-btn type="submit" label="Save" color="primary" />

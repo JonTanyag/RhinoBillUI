@@ -1,9 +1,12 @@
 <template>
     <q-page padding>
       <q-form @submit="submitForm">
-        <q-input v-model="course.code" label="Code" :readonly="isViewMode" required />
-        <q-input v-model="course.title" label="Title" :readonly="isViewMode" required />
-        <q-input v-model="course.credits" label="Credits" type="number" :readonly="isViewMode" required />
+        <q-input v-model="course.code" label="Code" :readonly="isViewMode"
+        :rules="[val => !!val || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val) || 'Must be between 5-10 alphanumeric characters only (no special characters']" required />
+        <q-input v-model="course.title" label="Title" :readonly="isViewMode"
+        :rules="[val => !!val || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val) || 'Must be between 5-50 alphanumeric and/or special characters only']" required />
+        <q-input v-model="course.credits" label="Credits" type="number" :readonly="isViewMode"
+        :rules="[val => !!val || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val) || 'Must be more than 0']" required />
         <q-btn @click="back" color="primary" label="Back" />
         <q-btn v-if="!isViewMode" type="submit" color="primary" label="Submit" />
       </q-form>
