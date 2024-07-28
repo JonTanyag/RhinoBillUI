@@ -2,9 +2,9 @@
   <q-page padding>
     <q-form @submit.prevent="submitForm">
       <q-input v-model="student.firstName" label="First Name" :readonly="isViewMode" 
-      :rules="[val => !!val || 'First Name is required', val => /^[a-zA-Z]{2,30}$/.test(val) || 'First Name must be 2-30 alphabet characters only']" required />
+      :rules="[val => !!val || /^[a-zA-Z]{2,30}$/.test(val) || 'First Name must be 2-30 alphabet characters only']" required />
       <q-input v-model="student.lastName" label="Last Name" :readonly="isViewMode"
-      :rules="[val => !!val || 'Last Name is required', val => /^[a-zA-Z]{2,30}$/.test(val) || 'Last Name must be 2-30 alphabet characters only']" required />
+      :rules="[val => !!val || /^[a-zA-Z]{2,30}$/.test(val) || 'Last Name must be 2-30 alphabet characters only']" required />
       <q-input v-model="student.email" label="Email" :readonly="isViewMode"
       :rules="[val => !!val || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val) || 'Email must be a valid email format']" required />
       <q-input
