@@ -5,10 +5,10 @@
       <q-input v-model="student.lastName" label="Last Name" :readonly="isViewMode" required />
       <q-input v-model="student.email" label="Email" :readonly="isViewMode" required />
       <q-input
-        v-model="student.birthday"
+        v-model="formattedApplicationDate"
         label="Birthday"
+        type="date"
         :mask="'####-##-##'"
-        :rules="[val => val && val.length === 10 || 'Please enter a valid date in YYYY-MM-DD format']"
       ></q-input>
       <q-input v-model="student.phoneNumber" label="Phone Number" :readonly="isViewMode" required />
       <q-btn @click="back" color="primary" label="Back" />
@@ -20,7 +20,6 @@
   <script lang="ts">
   import axios from 'axios';
   import { useRoute } from 'vue-router';
-  // import {Student} from '../interface/model';
   
   export default {
     data () {
@@ -36,6 +35,19 @@
       isViewMode: false,
       isEditMode: false
     }
+  },
+  computed: {
+    formattedApplicationDate: {
+      get() {
+        if (this.student.birthday) {
+          return this.student.birthday.substring(0,10).toString(); // Format to YYYY-MM-DD
+        }
+        return '';
+      },
+      set(value:string) {
+        this.student.birthday = new Date(value).toISOString();
+      },
+    },
   },
   created() {
     const route = useRoute();

@@ -5,7 +5,10 @@
         :columns="columns"
         row-key="id"
         title="Course List"
-      >
+      >    
+      <template v-slot:top-right>
+        <q-btn @click="goToCourseForm" color="primary" label="Add Course" />
+      </template>
       <template v-slot:body-cell-actions="props">
       <q-td :props="props">
           <span v-if="props.col.name !== 'actions'">{{ props.row[props.col.field] }}</span>
@@ -17,7 +20,6 @@
         </q-td>
       </template>
     </q-table>
-    <q-btn @click="goToCourseForm" color="primary" label="Add Student" />
     </q-page>
   </template>
   

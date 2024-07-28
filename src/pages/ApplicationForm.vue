@@ -9,6 +9,7 @@
         label="Select Student"
         emit-value
         map-options
+        :readonly="isViewMode"
       />
       <q-select
         v-model="application.courseId"
@@ -18,12 +19,15 @@
         label="Select Course"
         emit-value
         map-options
+        :readonly="isViewMode"
       />
       <q-input
-        v-model="application.applicationDate"
+        v-model="formattedApplicationDate"
         type="date"
         label="Application Date"
+        :readonly="isViewMode"
       />
+      <q-btn @click="back" color="primary" label="Back" />
       <q-btn type="submit" label="Save" color="primary" />
     </q-form>
   </q-page>
@@ -33,6 +37,7 @@
 import { defineComponent } from 'vue';
 import axios from 'axios';
 import { QPage, QForm, QSelect, QInput, QBtn } from 'quasar';
+import { useRoute } from 'vue-router';
 
 interface Student {
   id: number;
@@ -59,6 +64,12 @@ export default defineComponent({
     QInput,
     QBtn
   },
+  props: {
+    readOnly: {
+      type: Boolean,
+      default: false
+    }
+  },
   data() {
     return {
       application: {
@@ -68,8 +79,23 @@ export default defineComponent({
         applicationDate: ''
       } as Application,
       studentsOptions: [] as Student[],
-      coursesOptions: [] as Course[]
+      coursesOptions: [] as Course[],
+      isViewMode: false,
+      isEditMode: false
     };
+  },
+  computed: {
+    formattedApplicationDate: {
+      get() {
+        if (this.application.applicationDate) {
+          return this.application.applicationDate.substring(0,10).toString(); // Format to YYYY-MM-DD
+        }
+        return '';
+      },
+      set(value:string) {
+        this.application.applicationDate = new Date(value).toISOString();
+      },
+    },
   },
   methods: {
     async fetchStudents() {
@@ -129,17 +155,24 @@ export default defineComponent({
           applicationDate: ''
         };
       }
-    }
+    },
+    back() {
+      this.$router.push('/application-list');
+    },
   },
-  mounted() {
+  created() {
     this.fetchStudents();
     this.fetchCourses();
-    const id = this.$route.params.id;
-    this.initializeApplication(id ? Number(id) : undefined);
+
+    const route = useRoute();
+    const applicationId = Number(route.params.id);
+    this.isViewMode = route.query.view == 'true';
+    this.isEditMode = route.query.edit == 'true';
+
+    if (applicationId) {
+      this.initializeApplication(applicationId ? Number(applicationId) : undefined);
+    }
   }
 });
 </script>
 
-<style scoped>
-/* Add any custom styling here */
-</style>

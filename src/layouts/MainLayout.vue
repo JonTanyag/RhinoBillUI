@@ -11,7 +11,7 @@
 
     <q-drawer v-model="drawer" show-if-above bordered>
       <q-list>
-        <q-item-label header>Navigation</q-item-label>
+        <q-item-label header>RhinoBill Navigation</q-item-label>
 
         <q-item to="/student-list" clickable>
           <q-item-section>
