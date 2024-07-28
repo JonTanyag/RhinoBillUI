@@ -2,6 +2,13 @@
 
 RhinoBill Project
 
+## Install Vue and Quasar Framework
+```bash
+yarn install -g @vue/cli
+# or
+npm install -g @vue/cli
+```
+
 ## Install the dependencies
 ```bash
 yarn
