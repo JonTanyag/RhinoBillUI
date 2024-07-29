@@ -4,14 +4,20 @@
       <q-toolbar>
         <q-btn flat dense round @click="drawer = !drawer" icon="menu" aria-label="Menu" />
         <q-toolbar-title>
-          RhinoBill App
+          RhinoBill University
         </q-toolbar-title>
       </q-toolbar>
     </q-header>
 
     <q-drawer v-model="drawer" show-if-above bordered>
       <q-list>
-        <q-item-label header>RhinoBill Navigation</q-item-label>
+        <!-- <q-item-label header >Menu</q-item-label> -->
+
+        <q-item to="/" clickable>
+          <q-item-section>
+            <q-item-label>Home</q-item-label>
+          </q-item-section>
+        </q-item>
 
         <q-item to="/student-list" clickable>
           <q-item-section>
