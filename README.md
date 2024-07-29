@@ -20,7 +20,10 @@ npm install
 ```bash
 quasar dev
 ```
-
+## Create new Page
+```bash
+quasar new page <PageName>
+```
 
 ### Lint the files
 ```bash
